@@ -1,0 +1,16 @@
+{# templates/tp/boucle_for.html.twig #}
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h2>Table d'addition de 4</h2>
+    <ul>
+        {% for row in additionTable %}
+            <li>{{ row }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Table de multiplication de 2</h2>
+    <ul>
+        {% for row in multiplicationTable %}
+            <li>{{ row }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
