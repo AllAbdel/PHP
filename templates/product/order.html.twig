@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h2>Commande</h2>
+<ul>
+        <li>
+            <p> Produit Commandé : {{product.name}}</p>
+        </li>
+        <li>
+            <p> Stock restant : {{product.stock}} </P>
+        </li>
+        <li>
+            <p> Prix : {{product.price}} </P>
+        </li>
+</ul>
+{% endblock %}

@@ -14,6 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class ProductController extends AbstractController
 {
+
+    // ajout
     #[Route('/product/create/{name}/{price}/{stock}/{date}', name: 'product_create')]
     public function createProduct(string $name, float $price, int $stock, DateTime $date , EntityManagerInterface $em): Response
     {
@@ -28,7 +30,7 @@ final class ProductController extends AbstractController
 
         return new Response("Produit ajouté : {$name} - {$price}€ - Stock : {$stock}");
     }
-
+        // +10
         #[Route('/product/update_stock', name: 'product_update_stock')]
         public function updateStock(EntityManagerInterface $em, ProductRepository $repo): Response
         {
@@ -42,6 +44,9 @@ final class ProductController extends AbstractController
             return new Response("Stock mis à jour pour tous les produits.");
 
         }
+
+
+        // Liste
         #[Route('/products', name: 'product_list')]
         public function listProducts(ProductRepository $repo): Response
         {
@@ -49,6 +54,8 @@ final class ProductController extends AbstractController
             return $this->render('product/list.html.twig', ['products' => $products]);
         }
 
+
+        // tri par nom
         #[Route('/product/{name}', name: 'product_by_name')]
         public function getProductByName(string $name, ProductRepository $repo): Response
         {
@@ -56,34 +63,31 @@ final class ProductController extends AbstractController
             return $this->render('product/list.html.twig', ['products' => $products]);
         }
 
+
+        // commander par id (reduire de 1 le stock en gros)
         #[Route('/product/order/{id}', name: 'product_order')]
-        public function orderProduct(int $id, EntityManagerInterface $em, ProductRepository $repo): Response
+        public function orderProduct(int $id, EntityManagerInterface $em, ProductRepository $PRepo): Response
         {
-            $product = $repo->find($id);
+            $product = $PRepo->find($id);
 
             if ($product && $product->getStock() > 0) {
                 $product->setStock($product->getStock() - 1);
                 $em->flush();
-                return new Response("Commande passée pour {$product->getName()} !");
+                return $this->render('product/order.html.twig', ['product' => $product]);
             }
-
-            return new Response("Stock insuffisant.");
         }
 
 
+
+        // del
         #[Route('/product/delete/{id}', name: 'product_delete')]
-        public function deleteProduct(int $id, EntityManagerInterface $em, ProductRepository $repo): Response
-        {
-            $product = $repo->find($id);
+        
+        public function deleteProduct(Product $product, EntityManagerInterface $em){
+            $em->remove($product);
+            return $this->render('product/del.html.twig', ['product' => $product]);
 
-            if ($product) {
-                $em->remove($product);
-                $em->flush();
-                return new Response("Produit supprimé.");
-            }
-
-            return new Response("Produit introuvable.");
         }
+        
 
 
 }

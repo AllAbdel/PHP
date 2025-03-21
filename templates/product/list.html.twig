@@ -5,7 +5,7 @@
 <ul>
     {% for product in products %}
         <li>
-            {{ product.name }} - {{ product.price }}€ - Stock : {{ product.stock }}
+            {{product.id}} : {{ product.name }} - {{ product.price }}€ - Stock : {{ product.stock }}
             <a href="{{ path('product_order', {id: product.id}) }}">Commander</a>
             <a href="{{ path('product_delete', {id: product.id}) }}">Supprimer</a>
         </li>
