@@ -5,9 +5,14 @@ namespace App\Entity;
 use App\Repository\CommandeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -20,10 +25,13 @@ class Commande
     private ?Product $product = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\Positive]
     private ?int $quantity = null;
 
     #[ORM\Column]
-    private ?\DateTime $createdAt = null;
+    #[Assert\NotNull]
+    private ?\DateTimeInterface $createdAt = null;
 
     public function getId(): ?int
     {
@@ -77,4 +85,6 @@ class Commande
 
         return $this;
     }
+
+
 }
