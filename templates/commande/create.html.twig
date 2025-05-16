@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Créer une commande</h2>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-success">Valider la commande</button>
+    {{ form_end(form) }}
+{% endblock %}
