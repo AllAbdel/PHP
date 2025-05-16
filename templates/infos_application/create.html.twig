@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une application{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="mb-4">🧩 Ajouter une application</h2>
+
+            {{ form_start(form) }}
+                <div class="mb-3">
+                    {{ form_row(form.nom) }}
+                </div>
+                <div class="form-check mb-3">
+                    {{ form_row(form.actif) }}
+                </div>
+                <button class="btn btn-primary">💾 Enregistrer</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

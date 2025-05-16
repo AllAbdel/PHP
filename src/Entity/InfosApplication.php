@@ -32,10 +32,9 @@ class InfosApplication
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -52,14 +51,13 @@ class InfosApplication
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
+{
+    return $this->createdAt;
+}
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
+public function setCreatedAt(\DateTimeImmutable $createdAt): self
+{
+    $this->createdAt = $createdAt;
+    return $this;
+}
 }
