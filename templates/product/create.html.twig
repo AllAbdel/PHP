@@ -1,9 +1,29 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Créer une commande{% endblock %}
+
 {% block body %}
-    <h2>Créer un produit</h2>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn btn-primary">Enregistrer</button>
-    {{ form_end(form) }}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="mb-4">📦 Créer une commande</h2>
+
+            {{ form_start(form) }}
+                <div class="mb-3">
+                    {{ form_row(form.client) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.product) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.quantity) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.createdAt) }}
+                </div>
+                <button type="submit" class="btn btn-primary">✅ Valider la commande</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -34,6 +34,7 @@ class Product
     #[Assert\NotNull]
     #[Assert\PositiveOrZero]
     private ?int $stock = null;
+    
 
     /**
      * @var Collection<int, Commande>

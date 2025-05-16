@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ClientRepository;
 use App\Entity\Client;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,13 +12,17 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ClientController extends AbstractController
 {
-    #[Route('/client', name: 'app_client')]
-    public function index(): Response
-    {
-        return $this->render('client/index.html.twig', [
-            'controller_name' => 'ClientController',
-        ]);
-    }
+
+#[Route('/client', name: 'client_index')]
+public function index(ClientRepository $repo): Response
+{
+    $clients = $repo->findAll();
+
+    return $this->render('client/index.html.twig', [
+        'clients' => $clients,
+    ]);
+}
+
     #[Route('/client/create', name: 'client_create')]
     public function create(Request $request, EntityManagerInterface $em): Response {
         $client = new Client();

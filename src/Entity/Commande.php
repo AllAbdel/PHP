@@ -29,10 +29,9 @@ class Commande
     #[Assert\Positive]
     private ?int $quantity = null;
 
-    #[ORM\Column]
-    #[Assert\NotNull]
     #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $createdAt = null;
+
 
 
 

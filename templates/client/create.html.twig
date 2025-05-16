@@ -1,9 +1,23 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Créer un client{% endblock %}
+
 {% block body %}
-    <h2>Créer un client</h2>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <button class="btn btn-primary">Enregistrer</button>
-    {{ form_end(form) }}
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="mb-4">👤 Créer un client</h2>
+
+            {{ form_start(form) }}
+                <div class="mb-3">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(form.email) }}
+                </div>
+                <button type="submit" class="btn btn-primary">💾 Enregistrer</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
 {% endblock %}

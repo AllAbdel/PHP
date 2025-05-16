@@ -1,20 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ClientController!{% endblock %}
+{% block title %}Liste des clients{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="mb-4">👤 Liste des clients</h2>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <a href="{{ path('client_create') }}" class="btn btn-success mb-3">➕ Nouveau client</a>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/dev/UniServerZ/www/Synfony_Formulaire/src/Controller/ClientController.php</code></li>
-        <li>Your template at <code>C:/dev/UniServerZ/www/Synfony_Formulaire/templates/client/index.html.twig</code></li>
-    </ul>
+            {% if clients is not empty %}
+                <ul class="list-group">
+                    {% for client in clients %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ client.name }} — {{ client.email }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">Aucun client enregistré.</p>
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}

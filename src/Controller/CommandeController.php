@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Commande;
-use App\Form\CommandeType;
+use App\Repository\CommandeRepository;
 use App\Form\CommandeTypeForm;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,22 +13,18 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class CommandeController extends AbstractController
 {
-    #[Route('/commande', name: 'app_commande')]
-    public function index(): Response
-    {
-        return $this->render('commande/index.html.twig', [
-            'controller_name' => 'CommandeController',
-        ]);
-    }
 
-/*************  ✨ Windsurf Command ⭐  *************/
-    /**
-     * Creates a new commande entity.
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-/*******  e282bc5c-84b1-42f0-b8f6-95231283c1bf  *******/
+#[Route('/commande', name: 'commande_index')]
+public function index(CommandeRepository $repo): Response
+{
+    $commandes = $repo->findAll();
+
+    return $this->render('commande/index.html.twig', [
+        'commandes' => $commandes,
+    ]);
+}
+
+
     #[Route('/commande/create', name: 'commande_create')]
     public function create(Request $request, EntityManagerInterface $em): Response {
     $commande = new Commande();
@@ -40,6 +36,7 @@ final class CommandeController extends AbstractController
         $em->persist($commande);
         $em->flush();
         return $this->redirectToRoute('commande_index');
+
     }
 
     return $this->render('commande/create.html.twig', [

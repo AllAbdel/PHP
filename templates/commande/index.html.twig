@@ -1,20 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CommandeController!{% endblock %}
+{% block title %}Liste des commandes{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="mb-4">📦 Liste des commandes</h2>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <a href="{{ path('commande_create') }}" class="btn btn-primary mb-3">➕ Nouvelle commande</a>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/dev/UniServerZ/www/Synfony_Formulaire/src/Controller/CommandeController.php</code></li>
-        <li>Your template at <code>C:/dev/UniServerZ/www/Synfony_Formulaire/templates/commande/index.html.twig</code></li>
-    </ul>
+            {% if commandes is not empty %}
+                <ul class="list-group">
+                    {% for commande in commandes %}
+                        <li class="list-group-item">
+                            Client : <strong>{{ commande.client.name }}</strong> |
+                            Produit : <strong>{{ commande.product.name }}</strong> |
+                            Quantité : {{ commande.quantity }} |
+                            Date : {{ commande.createdAt|date('d/m/Y H:i') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-muted">Aucune commande enregistrée.</p>
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}
