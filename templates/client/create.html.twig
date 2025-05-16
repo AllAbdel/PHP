@@ -7,15 +7,22 @@
     <div class="card shadow-sm">
         <div class="card-body">
             <h2 class="mb-4">👤 Créer un client</h2>
-
             {{ form_start(form) }}
-                <div class="mb-3">
-                    {{ form_row(form.name) }}
-                </div>
-                <div class="mb-3">
-                    {{ form_row(form.email) }}
-                </div>
-                <button class="btn btn-primary">💾 Enregistrer</button>
+                {{ form_row(form.raisonSociale) }}
+                {{ form_row(form.adresse1) }}
+                {{ form_row(form.adresse2) }}
+                {{ form_row(form.adresse3) }}
+                {{ form_row(form.codePostal) }}
+                {{ form_row(form.ville) }}
+                {{ form_row(form.pays) }}
+                {{ form_row(form.formeJuridique) }}
+                {{ form_row(form.activite) }}
+                {{ form_row(form.siret) }}
+                {{ form_row(form.actif) }}
+                {{ form_row(form.nomPrenomRepresentant) }}
+                {{ form_row(form.emailRepresentant) }}
+                {{ form_row(form.telephoneRepresentant) }}
+                <button class="btn btn-primary">Enregistrer</button>
             {{ form_end(form) }}
         </div>
     </div>

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le client{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="mb-4">✏️ Modifier {{ client.raisonSociale }}</h2>
+
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-primary">💾 Enregistrer</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

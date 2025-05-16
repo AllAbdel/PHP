@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InfosApplicationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InfosApplicationRepository::class)]
@@ -21,6 +23,17 @@ class InfosApplication
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    /**
+     * @var Collection<int, Contrat>
+     */
+    #[ORM\OneToMany(targetEntity: Contrat::class, mappedBy: 'Application')]
+    private Collection $contrats;
+
+    public function __construct()
+    {
+        $this->contrats = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -58,6 +71,36 @@ class InfosApplication
 public function setCreatedAt(\DateTimeImmutable $createdAt): self
 {
     $this->createdAt = $createdAt;
+    return $this;
+}
+
+/**
+ * @return Collection<int, Contrat>
+ */
+public function getContrats(): Collection
+{
+    return $this->contrats;
+}
+
+public function addContrat(Contrat $contrat): static
+{
+    if (!$this->contrats->contains($contrat)) {
+        $this->contrats->add($contrat);
+        $contrat->setApplication($this);
+    }
+
+    return $this;
+}
+
+public function removeContrat(Contrat $contrat): static
+{
+    if ($this->contrats->removeElement($contrat)) {
+        // set the owning side to null (unless already changed)
+        if ($contrat->getApplication() === $this) {
+            $contrat->setApplication(null);
+        }
+    }
+
     return $this;
 }
 }
